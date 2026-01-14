@@ -26,19 +26,20 @@ Orion API ──────┘
 
 ```
 Reporting/
-├── CLAUDE.md              # AI assistant guidelines (this file)
-├── templates/             # HTML templates (standalone files)
-│   └── *.html
-├── styles/                # CSS stylesheets (standalone files)
-│   ├── base.css           # Shared styles across all reports
-│   └── print.css          # Print/PDF-specific styles
-├── reports/               # Report generation modules
+├── CLAUDE.md                  # AI assistant guidelines (this file)
+├── generate_households.py     # Main script: generate household PDF report
+├── requirements.txt           # Python dependencies
+├── templates/                 # HTML templates (standalone files)
+│   └── household-page.html    # Single household page template
+├── styles/                    # CSS stylesheets (standalone files)
+│   └── base.css               # Shared styles across all reports
+├── reports/                   # Report generation modules
+│   └── household_report.py    # Household PDF generator
+├── data/                      # Data fetching and processing
+│   └── orion.py               # Orion API utilities
+├── charts/                    # Chart generation
 │   └── *.py
-├── data/                  # Data fetching and processing
-│   └── *.py
-├── charts/                # Chart generation
-│   └── *.py
-└── output/                # Generated PDFs (gitignored)
+└── output/                    # Generated PDFs (gitignored)
 ```
 
 ## Design Principles
@@ -75,16 +76,21 @@ Reporting/
 
 ## Dependencies
 
-- `orionapi` - Custom module for Orion API access
-- `wealthbox` - Custom module for WealthBox API access
-- PDF generation library (TBD - likely weasyprint, pdfkit, or similar)
+- `orionapi` - Orion API access (PyPI)
+- `wealthbox` - WealthBox API access (PyPI)
+- `weasyprint` - HTML/CSS to PDF conversion
 
 ## Commands
 
 ```bash
-# (To be documented as project develops)
-# python -m reports.quarterly    # Generate quarterly report
-# python -m pytest               # Run tests
+# Install dependencies
+pip install -r requirements.txt
+
+# Generate household report (requires ORION_USERNAME and ORION_PASSWORD env vars)
+python generate_households.py
+
+# Run tests
+python -m pytest
 ```
 
 ## Coding Standards

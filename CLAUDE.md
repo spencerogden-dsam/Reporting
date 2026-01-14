@@ -5,76 +5,101 @@ This file provides guidance for AI assistants (like Claude) working on this code
 ## Repository Overview
 
 **Repository**: Reporting
-**Status**: New/Initial setup
-**Purpose**: Reporting system (to be defined as development progresses)
+**Language**: Python
+**Purpose**: Generate PDF reports for clients using data from WealthBox and Orion
+
+## Data Pipeline
+
+```
+WealthBox API ──┐
+                ├──► Data Processing ──► Calculations ──► Charts ──► HTML ──► PDF
+Orion API ──────┘
+```
+
+1. **Data Gathering**: Fetch raw data using `orionapi` and `wealthbox` Python modules
+2. **Processing**: Perform calculations on the data
+3. **Visualization**: Create charts as needed
+4. **Rendering**: Generate HTML from templates
+5. **Output**: Convert HTML to PDF for client delivery
 
 ## Project Structure
 
 ```
 Reporting/
-├── CLAUDE.md          # AI assistant guidelines (this file)
-└── (empty - awaiting initial development)
+├── CLAUDE.md              # AI assistant guidelines (this file)
+├── templates/             # HTML templates (standalone files)
+│   └── *.html
+├── styles/                # CSS stylesheets (standalone files)
+│   ├── base.css           # Shared styles across all reports
+│   └── print.css          # Print/PDF-specific styles
+├── reports/               # Report generation modules
+│   └── *.py
+├── data/                  # Data fetching and processing
+│   └── *.py
+├── charts/                # Chart generation
+│   └── *.py
+└── output/                # Generated PDFs (gitignored)
 ```
 
-As the project grows, update this section with the actual structure.
+## Design Principles
 
-## Development Workflow
+### HTML/CSS Guidelines
 
-### Branch Strategy
+- **Keep it simple**: Use vanilla HTML and CSS - no frameworks unless truly necessary
+- **Standalone files**: Templates and stylesheets should be simple, self-contained files
+- **Consistent styling**: All reports share common styles from `base.css`
+- **Print-first**: Design for PDF/print output, not screen viewing
 
-- Main branch: `main` (or as configured)
-- Feature branches: Use descriptive names prefixed appropriately (e.g., `feature/`, `fix/`, `claude/`)
-- Always create pull requests for code review before merging
+### Print/PDF Considerations
 
-### Commit Conventions
+- Use CSS `@page` rules for page size, margins, headers, footers
+- Use `page-break-before`, `page-break-after`, `page-break-inside` for layout control
+- Avoid elements that don't translate well to print (animations, hover states)
+- Test with actual PDF output, not just browser print preview
+- Consider using `@media print` for print-specific styles
 
-- Use clear, descriptive commit messages
-- Start with a verb in imperative mood (e.g., "Add", "Fix", "Update", "Remove")
-- Keep the first line under 72 characters
-- Reference issue numbers when applicable
+### CSS Structure
 
-Example:
+```css
+/* base.css - shared across all reports */
+@page {
+    size: letter;
+    margin: 1in;
+}
+
+/* print.css - print-specific overrides */
+@media print {
+    /* print styles */
+}
 ```
-Add user authentication module
 
-- Implement JWT-based authentication
-- Add login/logout endpoints
-- Include unit tests for auth flow
+## Dependencies
 
-Fixes #123
+- `orionapi` - Custom module for Orion API access
+- `wealthbox` - Custom module for WealthBox API access
+- PDF generation library (TBD - likely weasyprint, pdfkit, or similar)
+
+## Commands
+
+```bash
+# (To be documented as project develops)
+# python -m reports.quarterly    # Generate quarterly report
+# python -m pytest               # Run tests
 ```
 
 ## Coding Standards
 
-### General Guidelines
+### Python
 
-1. **Code Quality**: Write clean, readable, and maintainable code
-2. **Documentation**: Add comments for complex logic; keep code self-documenting where possible
-3. **Testing**: Include tests for new functionality
-4. **Security**: Never commit secrets, API keys, or credentials
+- Follow PEP 8 style guidelines
+- Use type hints where practical
+- Keep functions focused and single-purpose
 
 ### File Naming
 
-- Use lowercase with hyphens for file names (e.g., `user-report.py`)
-- Use descriptive names that indicate the file's purpose
-
-## Commands
-
-Document key commands here as they are established:
-
-```bash
-# Example commands (update as project develops)
-# npm install        # Install dependencies
-# npm test           # Run tests
-# npm run build      # Build project
-# npm run lint       # Run linter
-```
-
-## Architecture Notes
-
-Document key architectural decisions and patterns here as the project develops:
-
-- (To be documented)
+- Python: `snake_case.py`
+- HTML templates: `report-name.html`
+- CSS: `purpose.css`
 
 ## AI Assistant Instructions
 
@@ -83,44 +108,22 @@ When working on this codebase:
 1. **Read before modifying**: Always read existing code before making changes
 2. **Minimal changes**: Make only the changes necessary to complete the task
 3. **Preserve style**: Match existing code style and patterns
-4. **Test changes**: Run tests after making modifications
-5. **Update documentation**: Keep this CLAUDE.md file current as the project evolves
+4. **Simple solutions**: Prefer vanilla HTML/CSS over frameworks
+5. **Print-aware**: Always consider how changes affect PDF output
+6. **Consistent styling**: New reports should use shared styles from `base.css`
 
 ### Areas Requiring Extra Care
 
-- (To be documented as sensitive areas are identified)
+- **API credentials**: Never commit WealthBox or Orion API keys
+- **Page layout**: Test PDF output when modifying templates or styles
+- **Cross-report consistency**: Changes to base styles affect all reports
 
-### Common Pitfalls
+### Common Patterns
 
-- (To be documented as issues are discovered)
-
-## Dependencies
-
-Document major dependencies and their purposes here:
-
-- (None yet)
-
-## Environment Setup
-
-Document environment setup requirements here:
-
-```bash
-# Environment setup steps (to be documented)
-```
-
-## Testing
-
-Document testing approach and commands:
-
-- (Testing strategy to be documented)
-
-## Deployment
-
-Document deployment process:
-
-- (Deployment process to be documented)
+- Templates use simple HTML with placeholder variables
+- CSS is organized: base styles shared, report-specific styles separate
+- Data flows: API → processing → charts → template → PDF
 
 ---
 
 *Last updated: January 2026*
-*Update this file whenever significant changes are made to the codebase structure, workflows, or conventions.*

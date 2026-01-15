@@ -107,6 +107,35 @@ python -m pytest
 - HTML templates: `report-name.html`
 - CSS: `purpose.css`
 
+## Future: Report Delivery
+
+Report delivery will match generated PDFs with client emails and create draft emails for review.
+
+### Workflow
+
+1. **Match households**: Match Orion household names to WealthBox household names (name matching for now)
+2. **Get recipients**: For each WealthBox household, get primary email for adult members only:
+   - Include: Head, Spouse, Partner
+   - Exclude: Child and other relationship types
+3. **Upload to Box**: Create one folder per household per delivery, upload report PDF(s), generate shared link with expiration date
+4. **Create Gmail drafts**: Use Google Workspace API to create draft emails in user's account using a template (stored in repo). Draft includes:
+   - Recipients (to field)
+   - Subject line
+   - Body with secure Box link
+5. **User review**: Drafts remain in user's Gmail draft folder for review/editing before manual send
+
+### Configuration
+
+- **Gmail account**: `mverhelst@gmail.net` (may become per-household setting later)
+- **Box folder structure**: One folder per household per delivery
+- **Email template**: Stored in this repository
+
+### Dependencies (future)
+
+- `wealthbox` - WealthBox API for household/contact lookup
+- Google Workspace API - Gmail draft creation
+- Box API - Folder creation, file upload, shared links
+
 ## AI Assistant Instructions
 
 When working on this codebase:

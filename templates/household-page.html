@@ -6,8 +6,28 @@
     <link rel="stylesheet" href="../styles/base.css">
 </head>
 <body>
-    <div class="page page-centered">
+    <div class="page">
         <h1>{{household_name}}</h1>
+
+        <h2>Account Summary</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Account Name</th>
+                    <th>Account Type</th>
+                    <th class="text-right">Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{account_rows}}
+            </tbody>
+            <tfoot>
+                <tr class="summary-row">
+                    <td colspan="2"><strong>Total</strong></td>
+                    <td class="text-right"><strong>{{total_balance}}</strong></td>
+                </tr>
+            </tfoot>
+        </table>
     </div>
 </body>
 </html>

@@ -1,0 +1,93 @@
+/* Dock Street Design Tokens */
+
+:root {
+  /* ===========================================
+     TYPOGRAPHY
+     =========================================== */
+  --font-family: "Garamond", "Times New Roman", serif;
+  --font-size-body: 11pt;
+  --font-size-small: 9pt;
+  --font-size-h1: 24pt;
+  --font-size-h2: 16pt;
+  --font-size-h3: 12pt;
+  --font-weight-normal: 400;
+  --font-weight-bold: 600;
+  --line-height: 1.4;
+
+  /* ===========================================
+     REPORT COLORS (Black & White Default)
+     =========================================== */
+  --color-text: #000000;
+  --color-text-secondary: #43486C;    /* Flower - for labels, secondary text */
+  --color-heading: #000000;
+  --color-border: #000000;
+  --color-border-light: #dddddd;
+  --color-background: #ffffff;
+  --color-background-alt: #f5f5f5;    /* Table headers, zebra rows */
+
+  /* ===========================================
+     DOCK STREET PALETTE - Primary / Core
+     Blue owns the data (80-90% of chart use)
+     =========================================== */
+  --color-corporate: #061441;   /* Primary series, key totals, anchor color */
+  --color-water: #244076;       /* Benchmark, secondary important data */
+  --color-sky: #506CAC;         /* Tertiary comparison */
+  --color-cloud: #899DC2;       /* Historical, projected, de-emphasized */
+
+  /* ===========================================
+     DOCK STREET PALETTE - Secondary / Natural
+     Green is conditional, not decorative
+     =========================================== */
+  --color-flower: #43486C;      /* Utility: axis labels, annotations, gridlines */
+  --color-grass: #254E45;       /* Positive cash flow, operational strength */
+  --color-foliage: #76997D;     /* Sustainable growth, organic concepts */
+
+  /* ===========================================
+     DOCK STREET PALETTE - Neutrals / Accents
+     Warm colors are flags, not series
+     =========================================== */
+  --color-clean: #EDE6D5;       /* Backgrounds, chart areas, table fills only */
+  --color-sun: #CC7F30;         /* Highlight, callout, threshold (use sparingly) */
+  --color-build: #812A15;       /* Alert, emphasis (use sparingly) */
+
+  /* ===========================================
+     CHART COLOR STACK (Default Order)
+     1. Corporate  - primary line/bar
+     2. Water      - benchmark
+     3. Sky        - secondary comparison
+     4. Cloud      - historical/projection
+     5. Sun/Build  - highlight/alert (rare)
+     =========================================== */
+  --chart-1: var(--color-corporate);
+  --chart-2: var(--color-water);
+  --chart-3: var(--color-sky);
+  --chart-4: var(--color-cloud);
+  --chart-highlight: var(--color-sun);
+  --chart-alert: var(--color-build);
+  --chart-background: var(--color-clean);
+  --chart-axis: var(--color-flower);
+
+  /* ===========================================
+     SPACING SCALE
+     =========================================== */
+  --space-xs: 4pt;
+  --space-sm: 8pt;
+  --space-md: 16pt;
+  --space-lg: 24pt;
+  --space-xl: 32pt;
+
+  /* ===========================================
+     PAGE LAYOUT
+     =========================================== */
+  --page-margin-top: 0.75in;
+  --page-margin-bottom: 0.75in;
+  --page-margin-left: 0.75in;
+  --page-margin-right: 0.75in;
+
+  /* ===========================================
+     TABLE
+     =========================================== */
+  --table-header-bg: var(--color-background-alt);
+  --table-cell-padding: 6pt 8pt;
+  --table-border-width: 1px;
+}
